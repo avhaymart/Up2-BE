@@ -11,7 +11,6 @@ var eventsRoute = require("./routes/events");
 const tagsRoute = require("./routes/tags");
 
 var app = express();
-
 // connect to DB
 connect();
 

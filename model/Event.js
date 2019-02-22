@@ -12,6 +12,6 @@ const eventSchema = new Schema({
   hashtag: String
 })
 
-const Event = mongoose.model('event', eventSchema);
+const Event = mongoose.model('Event', eventSchema);
 
 module.exports = Event;
