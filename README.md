@@ -1,4 +1,4 @@
-# Up2 Social Media Project
+# Up2 Social Back End
 
 * Team Members
    * Avonlea Haymart
