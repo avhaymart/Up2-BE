@@ -1,24 +1,37 @@
 var createError = require("http-errors");
 var express = require("express");
+const cors = require("cors");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-const connection = require("./DB/connect");
+
+const connect = require("./DB/connect");
+
 var eventsRoute = require("./routes/events");
+const tagsRoute = require("./routes/tags");
 
 var app = express();
-connection();
+
+// connect to DB
+connect();
+
+// Helps cross origin connection
+app.use(cors);
+
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
-app.set("view engine", "jade");
-
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+// =====================
+// Linking Routes here
+// ======================
+
 app.use("/api/events", eventsRoute);
+app.use("/api/tags", tagsRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
