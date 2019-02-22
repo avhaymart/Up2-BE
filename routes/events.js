@@ -9,17 +9,18 @@ router.get("/", (req, res, next) => {
   Event.find()
     .then(data => res.json(data))
     .catch(err =>
-      res.status(500).json({ err: "Smething went wrong at server side" })
+      res.status(500).json({ err: "Something went wrong at server side" })
     );
 });
 
 // ====================
 // POST Req of Events
 // ===================
-router.post("/", (req, res, next) => {
+router.post("/", (req, res) => {
   Event.create(req.body)
-    .then(data => res.json(data))
-    .catch(next);
+    .then(data => {console.log("data before hitting server", data)
+    res.json(data)})
+    .catch(err => console.log(err));
 });
 
 // ====================
