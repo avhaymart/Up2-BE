@@ -1,12 +1,19 @@
 var createError = require("http-errors");
 var express = require("express");
+const cors = require("cors");
 var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
-
+const connect = require("./DB/connect");
 var eventsRoute = require("./routes/events");
 
 var app = express();
+
+// connect to DB
+connect();
+
+// Helps cross origin connection
+app.use(cors);
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
@@ -18,6 +25,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+// =====================
+// Linking Routes here
+// ======================
 app.use("/api/events", eventsRoute);
 
 // catch 404 and forward to error handler
