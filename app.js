@@ -16,7 +16,7 @@ var app = express();
 connect();
 
 // Helps cross origin connection
-app.use(cors);
+app.use(cors());
 
 // view engine setup
 app.set("views", path.join(__dirname, "views"));
