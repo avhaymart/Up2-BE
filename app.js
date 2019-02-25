@@ -7,8 +7,9 @@ var logger = require("morgan");
 
 const connect = require("./DB/connect");
 
-var eventsRoute = require("./routes/events");
+const eventsRoute = require("./routes/events");
 const tagsRoute = require("./routes/tags");
+const usersRoute = require("./routes/users");
 
 var app = express();
 // connect to DB
@@ -25,12 +26,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
+
 // =====================
 // Linking Routes here
 // ======================
 
 app.use("/api/events", eventsRoute);
 app.use("/api/tags", tagsRoute);
+app.use("/api/users", usersRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -45,7 +48,8 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.render("error");
+  res.status(404).send("Sorry can't find that!")
+  res.send("error");
 });
 
 module.exports = app;
