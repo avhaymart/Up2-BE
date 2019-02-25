@@ -8,7 +8,7 @@ var logger = require("morgan");
 const connect = require("./DB/connect");
 
 var eventsRoute = require("./routes/events");
-const tagsRoute = require("./routes/tags");
+const routes = require('./routes')
 
 var app = express();
 // connect to DB
@@ -29,8 +29,8 @@ app.use(express.static(path.join(__dirname, "public")));
 // Linking Routes here
 // ======================
 
-app.use("/api/events", eventsRoute);
-app.use("/api/tags", tagsRoute);
+app.use(routes);
+// app.use("/api/tags", tagsRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
