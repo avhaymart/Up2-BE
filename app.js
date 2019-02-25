@@ -7,9 +7,8 @@ var logger = require("morgan");
 
 const connect = require("./DB/connect");
 
-const eventsRoute = require("./routes/events");
-const tagsRoute = require("./routes/tags");
-const usersRoute = require("./routes/users");
+//var eventsRoute = require("./routes/Trents");
+const routes = require('./routes')
 
 var app = express();
 // connect to DB
@@ -22,7 +21,7 @@ app.use(cors());
 app.set("views", path.join(__dirname, "views"));
 app.use(logger("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
@@ -31,9 +30,8 @@ app.use(express.static(path.join(__dirname, "public")));
 // Linking Routes here
 // ======================
 
-app.use("/api/events", eventsRoute);
-app.use("/api/tags", tagsRoute);
-app.use("/api/users", usersRoute);
+app.use(routes);
+// app.use("/api/tags", tagsRoute);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -48,8 +46,10 @@ app.use(function(err, req, res, next) {
 
   // render the error page
   res.status(err.status || 500);
-  res.status(404).send("Sorry can't find that!")
-  res.send("error");
+  res.json({
+    message: err.message,
+    error: err
+  });
 });
 
 module.exports = app;

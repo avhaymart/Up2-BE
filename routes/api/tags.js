@@ -1,6 +1,7 @@
 var express = require("express");
 var router = express.Router();
-const Tag = require("../model/Tag");
+const eventsController = require('../../controllers/eventsController');
+
 
 router.get("/", (req, res) => {
   res.send("Tag is working");

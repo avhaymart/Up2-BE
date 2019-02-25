@@ -11,8 +11,9 @@ const eventSchema = new Schema({
   title: String,
   description: String,
   image: String,
-  value: Number
+  value: Number,
   // hashtag: String
+  comments: { type: Array, default: void 0 }
 })
 
 const Event = mongoose.model('Event', eventSchema);
