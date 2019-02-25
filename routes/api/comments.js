@@ -4,7 +4,6 @@ const commentsController = require('../../controllers/commentsController');
 
 //Responds to /api/comments
 router.route('/')
-    .get(commentsController.findAll)
     .post(commentsController.create);
 
     // Matches with "/api/comments/:id"

@@ -1,4 +1,4 @@
-const db = require('../models');
+const db = require('../model');
 
 //Methods for comment controls
 module.exports = {
@@ -14,7 +14,7 @@ module.exports = {
             postDate: Date.now()
         }
         db.Comment
-            .create(dbREady)
+            .create(dbReady)
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
