@@ -28,25 +28,39 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     create: function (req, res) {
-        // let dbReady ={
-        //     id: id
-        // }
-        // db.User 
-        //     .create(req.body)
-        //     .then(dbModel => res.json(dbModel))
-        //     .catch(err => res.status(422).json(err));
-
         const data = req.body;
 
-        db.User.create({
-            first_name: data.first_name,
-            last_name: data.last_name,
-            username: data.username,
-            password: data.password,
-        }).then((stuff) => {
-            console.log(User.find());
-            res.sendStatus(200);
-        }).catch(err => console.log(err));
+        console.log(data)
+        if (data.password === data.confirm_password) {
+            db.User.find({
+                username: data.username
+            }).then((db_res) => {
+                console.log(db_res)
+                try {
+                    if (db_res[0].username) {
+                        console.log("Username already exists")
+                        // the value 2 for fail means the user already exists
+                        res.send({fail:2})
+                    }
+                } catch {
+                    console.log("User doesn't exist yet")
+                    db.User.create({
+                        first_name: data.first_name,
+                        last_name: data.last_name,
+                        username: data.username,
+                        password: data.password,
+                    }).then(() => {
+                        console.log("User created");
+                        res.send({fail:0})
+                    }).catch(err => console.log(err));
+                }
+            })
+        } else {
+            // the value 1 for fail means passwords do not match
+            res.send({fail:1})
+        }
+
+
     },
     update: function (req, res) {
         db.User
