@@ -10,13 +10,14 @@ module.exports = {
   create: function(req, res) {
     let dbReady = {
       comment: req.body.comment,
-      postDate: Date.now()
+      postDate: Date.now(),
+      author: req.body.author
     };
     db.Comment.create(dbReady)
       .then(dbModel => res.json(dbModel))
       .catch(err => res.status(422).json(err));
 
-    // Create notification using comment author
+   // Create notification using comment author
     const notification = {
       event: req.body.eventID,
       date: Date.now(),
