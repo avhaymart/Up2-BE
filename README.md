@@ -21,4 +21,6 @@
   * At the root of the directory, run```npm install```.
   * Note: Ensure MongoDB is running. ```mongo```
   * This project requires the front end for full functionality. You can clone that here: ```https://github.com/coop741/Up2/```
+  * Create a .env file at the root of the project directory. Insert the following into it, replacing "mongodb://" with your connection string.
+  ```MONGO_DB="mongodb://"```
   * Run ```npm start```.
