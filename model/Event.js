@@ -28,6 +28,10 @@ const eventSchema = new Schema({
               return "AM"
           }
       }
+
+      if (hour > 12) {
+        hour = hour-12
+      }
       return `${mm}/${dd}/${yyyy} @ ${hour}:${minute} ${timeOfDay()}`;
     }
   },
