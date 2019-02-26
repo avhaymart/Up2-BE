@@ -1,8 +1,8 @@
 const mongoose = require("mongoose");
 // Mongoose connection goes here
 // =============================
-
-const url = "mongodb://localhost:27017/Up2";
+const dotenv = require('dotenv').config()
+const url = process.env.MONGO_DB;
 const connect = () => {
   mongoose
     .connect(url, {
