@@ -19,7 +19,7 @@ const eventSchema = new Schema({
           mm = '0' + mm;
       }
       
-      var hour = today.getHours();
+      var hour = today.getUTCHours - 7
       var minute = today.getMinutes();
       var timeOfDay = function(){
           if (hour >= 12){
@@ -32,6 +32,7 @@ const eventSchema = new Schema({
       if (hour > 12) {
         hour = hour-12
       }
+      console.log(`${mm}/${dd}/${yyyy} @ ${hour}:${minute} ${timeOfDay()}`)
       return `${mm}/${dd}/${yyyy} @ ${hour}:${minute} ${timeOfDay()}`;
     }
   },
@@ -47,3 +48,29 @@ const eventSchema = new Schema({
 const Event = mongoose.model("Event", eventSchema);
 
 module.exports = Event;
+
+var today = new Date();
+      var dd = today.getDate();
+      var mm = today.getMonth() + 1; //January is 0!
+      
+      var yyyy = today.getFullYear();
+      if (dd < 10) {
+          dd = '0' + dd;
+      }
+      if (mm < 10) {
+          mm = '0' + mm;
+      }
+      
+      var hour = today.getUTCHours() - 7
+      var minute = today.getMinutes();
+      var timeOfDay = function(){
+          if (hour < 12){
+            
+              return "AM"
+          } else if (hour >= 12) {
+              return "PM"
+          }
+      }
+
+
+      console.log(`${mm}/${dd}/${yyyy} @ ${hour > 12 ? hour-12 : hour}:${minute} ${timeOfDay()}`)
