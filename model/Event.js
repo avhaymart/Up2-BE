@@ -21,6 +21,10 @@ const eventSchema = new Schema({
       
       var hour = today.getUTCHours() - 7
       var minute = today.getMinutes();
+
+      if (minute < 10) {
+        minute = '0' + minute;
+      }
       var timeOfDay = function(){
           if (hour < 12){
             
